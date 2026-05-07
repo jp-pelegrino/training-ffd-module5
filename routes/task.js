@@ -29,7 +29,7 @@ function buildTask(data) {
 
     // TODO: status { status }
 
-    // TODO: intent { 'order' } 
+    // TODO: intent { 'order' }
 
     // TODO: priority { priority }
 
