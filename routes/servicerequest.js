@@ -30,9 +30,11 @@ function buildServiceRequest(data) {
       }
     },
 
-    // TODO: status { status }
+    // TODO: ✅status { status }
+    status: data.status,
 
-    // TODO: intent { 'order' }
+    // TODO: ✅intent { 'order' }
+    intent: 'order',
 
     // category
     category: [
@@ -47,27 +49,56 @@ function buildServiceRequest(data) {
       }
     ],
 
-    // TODO: priority { priority }
+    // TODO: ✅priority { priority }
+    priority: data.priority,
 
-    // TODO: code { request_code_code, request_code_display, 'http://snomed.info/sct' }
+    // TODO: ✅code { request_code_code, request_code_display, 'http://snomed.info/sct' }
+    code: {
+      coding: [
+        {
+          code: data.request_code_code,
+          display: data.request_code_display,
+          system: "http://snomed.info/sct"
+        }
+      ]
+    },
 
-    // TODO: subject { patient_id }
+    // TODO: ✅subject { patient_id }
+      "subject": {
+        "reference": "Patient/"+data.patient_id
+      },
 
-    // TODO: authoredOn { authoredOn }
+    // TODO: ✅authoredOn { authoredOn }
+    authoredOn: data.authoredOn,
     
-    // TODO: requester { placer_practitionerrole_id }
+    // TODO: ✅requester { placer_practitionerrole_id }
+      "requester": {
+        "reference": "PractitionerRole/"+data.placer_practitionerrole_id
+      },
 
-    // TODO: performerType { performerType_code, performerType_display, 'http://snomed.info/sct' }
+
+    // TODO: ✅performerType { performerType_code, performerType_display, 'http://snomed.info/sct' }
+      "performerType": {
+        "coding": [
+          {
+            "code": data.performerType_code,
+            "display": data.performerType_display,
+            "system": "http://snomed.info/sct"
+          }
+        ]
+      }
   };
   
   // conditionally populate when reasonCode provided
   if (data.reasonCode_code) {
 
-    // TODO: reasonCode { reasonCode_code, reasonCode_display }
+    // TODO: ✅reasonCode { reasonCode_code, reasonCode_display }
     servicerequest.reasonCode = [
       {        
         coding: [
           {
+            code: data.reasonCode_code,
+            display: data.reasonCode_display,
             system:  "http://snomed.info/sct"
           }
         ]  
